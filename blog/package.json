@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production nodemon index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "test": "NODE_ENV=test jest --verbose runInBand",
-    "build:ui":"rm -rf dist && cd ../bloglist-frontend/ && npm run build && cp -r dist ../blog"
+    "build:ui": "rm -rf dist && cd ../bloglist-frontend/ && npm run build && cp -r dist ../blog"
   },
   "keywords": [],
   "author": "ovchinikov",
