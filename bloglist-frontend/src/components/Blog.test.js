@@ -23,6 +23,9 @@ test('renders content', () => {
     'Component testing is done with react-testing-library Maskim',
   )
   expect(div).toBeDefined()
+  const showWhenVisible = document.querySelector('.showWhenVisible')
+  expect(showWhenVisible).toHaveTextContent('https://reactpatterns.com/')
+  expect(showWhenVisible).toHaveTextContent(5)
 })
 
 describe('<Togglable />', () => {

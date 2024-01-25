@@ -23,7 +23,7 @@ const Blog = ({ blog, increaseLikes, deleteBlog, user }) => {
         {blog.title} {blog.author}{' '}
         <button onClick={handleView}>{visible ? 'hide' : 'view'}</button>
       </div>
-      <div style={showWhenVisible} key={blog.id}>
+      <div style={showWhenVisible} key={blog.id} className='showWhenVisible'>
         <p>{blog.author}</p>
         <a href={blog.url}>{blog.url}</a>
         <p>
