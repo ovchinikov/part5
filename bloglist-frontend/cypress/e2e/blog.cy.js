@@ -16,7 +16,7 @@ describe('Blogs app', () => {
 
   // wrong login information
 
-  it.only('login failure', () => {
+  it('login failure', () => {
     cy.contains('login').click()
     cy.get('#username').type('123455')
     cy.get('#password').type('password')
@@ -51,11 +51,24 @@ describe('Blogs app', () => {
         cy.get('#url').type('deogracious.dev')
         cy.get('#add').click()
       })
-      it('new blog can be viewed', () => {
-        cy.contains('Some random content')
-        cy.contains('view').click()
-        cy.contains('Some random content').contains('hide')
+
+      describe('blog already exists', () => {
+        beforeEach(() => {
+          cy.contains('Some random content')
+          cy.contains('view').click()
+        })
+        it('like button works', () => {
+          cy.contains('like').click()
+          cy.contains(1)
+        })
+        it('delete blog', () => {
+          cy.contains('delete').click()
+          cy.contains('Some random content deleted successfully!')
+        })
       })
+      // test like button
+
+      // test delete button
     })
   })
 })

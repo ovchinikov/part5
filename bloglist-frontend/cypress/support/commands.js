@@ -24,14 +24,14 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', ({ username, password }) => {
+Cypress.Commands.add('loginUser', ({ username, password }) => {
   cy.request('POST', 'http://localhost:3000/api/login', {
     username,
     password,
   }).then(({ body }) => {
     localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
   })
+  cy.visit('http://localhost:3000')
 })
 
 Cypress.Commands.add('createBlog', ({ title, author, url }) => {
@@ -46,5 +46,5 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) => {
     },
   })
 
-  cy.visit('http://localhost:3000')
+  cy.visit('')
 })

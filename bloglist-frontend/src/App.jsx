@@ -55,7 +55,7 @@ const App = () => {
       })
       setBlogs(blogs.map((blog) => (blog.id !== newBlog.id ? blog : newBlog)))
     } catch (error) {
-      setMessage(error.message, 'error')
+      notifyUser(error.message, 'error')
     }
   }
 
@@ -67,9 +67,10 @@ const App = () => {
       if (ok) {
         await blogService.remove(blog.id)
         setBlogs(blogs.filter((b) => b.id !== blog.id))
+        notifyUser(`${blog.title} deleted successfully!`, 'success')
       } else return
     } catch (error) {
-      setMessage(error.message, 'error')
+      notifyUser(error.message, 'error')
     }
   }
   const sortBlogs = (blogs) => {
