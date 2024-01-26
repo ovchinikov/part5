@@ -14,7 +14,11 @@ const Notification = ({ message }) => {
   if (!message.text) {
     return
   } else {
-    return <div style={style}>{message.text}</div>
+    return (
+      <div style={style} className='error'>
+        {message.text}
+      </div>
+    )
   }
 }
 

@@ -4,8 +4,9 @@ import { render, screen } from '@testing-library/react'
 import Blog from './Blog'
 import Togglable from './togglable'
 import userEvent from '@testing-library/user-event'
+import CreateBlog from './createblog'
 
-test('renders content', () => {
+describe('test blog and like buttons', () => {
   const blog = {
     title: 'Component testing is done with react-testing-library',
     author: 'Maskim',
@@ -15,18 +16,31 @@ test('renders content', () => {
   const user = {
     username: 'vlad',
   }
+  test('renders content', () => {
+    const { container } = render(<Blog blog={blog} user={user} />)
 
-  const { container } = render(<Blog blog={blog} user={user} />)
+    const div = container.querySelector('.blog')
+    expect(div).toHaveTextContent(
+      'Component testing is done with react-testing-library Maskim',
+    )
+    expect(div).toBeDefined()
+    const showWhenVisible = document.querySelector('.showWhenVisible')
+    expect(showWhenVisible).toHaveTextContent('https://reactpatterns.com/')
+    expect(showWhenVisible).toHaveTextContent(5)
+  })
 
-  const div = container.querySelector('.blog')
-  expect(div).toHaveTextContent(
-    'Component testing is done with react-testing-library Maskim',
-  )
-  expect(div).toBeDefined()
-  const showWhenVisible = document.querySelector('.showWhenVisible')
-  expect(showWhenVisible).toHaveTextContent('https://reactpatterns.com/')
-  expect(showWhenVisible).toHaveTextContent(5)
+  test('like buttons', async () => {
+    const mockHandler = jest.fn()
+    render(<Blog blog={blog} increaseLikes={mockHandler} user={user} />)
+    const user1 = userEvent.setup()
+    const button = screen.getByText('like')
+    await user1.click(button)
+    await user1.click(button)
+    expect(mockHandler.mock.calls).toHaveLength(2)
+  })
 })
+
+// test button clicks
 
 describe('<Togglable />', () => {
   let container

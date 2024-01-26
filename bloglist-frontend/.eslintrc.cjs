@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
     es2020: true,
     'jest/globals': true,
+    'cypress/globals': true,
   },
   extends: [
     'eslint:recommended',
@@ -29,4 +30,4 @@ module.exports = {
     'react/prop-types': 0,
     'no-unused-vars': 0,
   },
-};
+}

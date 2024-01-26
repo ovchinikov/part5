@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 
 import blogService from '../services/blogs'
 
-const CreateBlog = ({ user, setBlogs, blogs, notifyUser, blogFormRef }) => {
+const CreateBlog = ({
+  user,
+  setBlogs,
+  blogs,
+  notifyUser,
+  blogFormRef,
+  createBlog,
+}) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -41,6 +48,8 @@ const CreateBlog = ({ user, setBlogs, blogs, notifyUser, blogFormRef }) => {
           type='text'
           value={title}
           name='title'
+          id='title'
+          placeholder='title'
           onChange={({ target }) => setTitle(target.value)}
         />
       </div>
@@ -49,6 +58,7 @@ const CreateBlog = ({ user, setBlogs, blogs, notifyUser, blogFormRef }) => {
         <input
           type='text'
           value={author}
+          id='author'
           name='author'
           onChange={({ target }) => setAuthor(target.value)}
         />
@@ -59,10 +69,13 @@ const CreateBlog = ({ user, setBlogs, blogs, notifyUser, blogFormRef }) => {
           type='text'
           value={url}
           name='url'
+          id='url'
           onChange={({ target }) => setUrl(target.value)}
         />
       </div>
-      <button type='submit'>Add</button>
+      <button type='submit' id='add'>
+        Add
+      </button>
     </form>
   )
 }
