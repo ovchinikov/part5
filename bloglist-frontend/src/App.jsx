@@ -44,6 +44,20 @@ const App = () => {
       window.localStorage.clear()
     } else return
   }
+  // create blog
+
+  const addBlog = (blogObject) => {
+    try {
+      ;(async () => {
+        const res = await blogService.create(blogObject)
+        setBlogs(blogs.concat(res))
+        notifyUser(`${res.title} added by ${user.name}`, 'success')
+        blogFormRef.current.toggleVisibility()
+      })()
+    } catch (error) {
+      notifyUser(error.message, 'error')
+    }
+  }
 
   // increase likes
 
@@ -96,6 +110,7 @@ const App = () => {
               notifyUser={notifyUser}
               user={user}
               blogFormRef={blogFormRef}
+              createBlog={addBlog}
             />
           </Togglable>
           <h2>blogs</h2>

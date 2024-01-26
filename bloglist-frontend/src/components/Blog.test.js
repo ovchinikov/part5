@@ -71,3 +71,19 @@ describe('<Togglable />', () => {
     expect(div).not.toHaveStyle('display: none')
   })
 })
+
+test('<createBlog /> updates parent state and calls onSubmit', async () => {
+  const mockHandler = jest.fn()
+  const user = userEvent.setup()
+
+  const { container } = render(<CreateBlog createBlog={mockHandler} />)
+
+  const input = container.querySelector('#title')
+  const button = screen.getByText('Add')
+
+  await user.type(input, 'hello world!')
+  await userEvent.click(button)
+
+  expect(mockHandler.mock.calls).toHaveLength(1)
+  expect(mockHandler.mock.calls[0][0].title).toBe('hello world!')
+})

@@ -1,16 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import blogService from '../services/blogs'
-
-const CreateBlog = ({
-  user,
-  setBlogs,
-  blogs,
-  notifyUser,
-  blogFormRef,
-  createBlog,
-}) => {
+const CreateBlog = ({ createBlog }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -23,22 +14,8 @@ const CreateBlog = ({
 
   const addBlog = (e) => {
     e.preventDefault()
-    const blog = {
-      title,
-      author,
-      url,
-    }
-    try {
-      ;(async () => {
-        const res = await blogService.create(blog)
-        setBlogs(blogs.concat(res))
-        clearBlogForm('')
-        notifyUser(`${res.title} added by ${user.name}`, 'success')
-        blogFormRef.current.toggleVisibility()
-      })()
-    } catch (error) {
-      notifyUser(error.message, 'error')
-    }
+    createBlog({ title, author, url })
+    clearBlogForm('')
   }
   return (
     <form onSubmit={addBlog}>
